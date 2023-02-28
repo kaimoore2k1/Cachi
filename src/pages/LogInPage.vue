@@ -10,13 +10,21 @@
         <q-card square bordered class="q-pa-lg shadow-1">
           <q-card-section>
             <q-form class="q-gutter-md">
-              <q-input square filled clearable type="email" label="email" />
+              <q-input
+                v-model="username"
+                square
+                filled
+                clearable
+                type="email"
+                label="email"
+              />
               <q-input
                 square
                 filled
                 clearable
                 type="password"
                 label="password"
+                v-model="password"
               />
             </q-form>
           </q-card-section>
@@ -40,24 +48,33 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
+import { getToken } from "../api/core/login";
 export default defineComponent({
   name: "LoginPage",
   setup() {
     const router = useRouter();
+
+    const username = ref("");
+    const password = ref("");
+
     const handleLogin = () => {
-      const loginInfo = {
-        userName: "Admin",
-        userRole: 1,
-        avatar: "",
-        locate: "vi-VN",
+      const params = {
+        username: username.value,
+        password: password.value,
       };
-      localStorage.setItem("user", JSON.stringify(loginInfo));
-      router.push("/");
+      getToken(params).then((res) => {
+        if (res.status === 200) {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          router.push("/");
+        }
+      });
     };
     return {
       handleLogin,
+      username,
+      password,
     };
   },
 });
