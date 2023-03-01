@@ -6,10 +6,21 @@ const http = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: false,
+  timeout: 5000
 });
 
-const request = (payload) => {
-  return http(payload);
-};
+http.interceptors.request.use((config) => {
+  config.headers.Authorization = 'Bearer Token';
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+})
 
-export default request;
+http.interceptors.response.use((response) => {
+  return response.data
+}, (error) => {
+  return Promise.reject(error);
+})
+
+export default http;
