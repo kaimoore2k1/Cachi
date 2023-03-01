@@ -65,10 +65,8 @@ export default defineComponent({
         password: password.value,
       };
       getToken(params).then((res) => {
-        if (res.status === 200) {
-          localStorage.setItem("user", JSON.stringify(res.data));
-          router.push("/");
-        }
+        localStorage.setItem("user", JSON.stringify(res));
+        router.push("/");
       });
     };
     return {
