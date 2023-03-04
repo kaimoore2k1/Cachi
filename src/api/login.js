@@ -1,6 +1,6 @@
-import { REQUEST_METHOD } from "../../../const";
-import request from "src/api/http";
+import { api } from "src/boot/axios";
 import { getUrl } from "src/helper";
+import { REQUEST_METHOD } from "src/helper";
 
 export const getToken = (param) => {
   const payload = {
@@ -11,5 +11,5 @@ export const getToken = (param) => {
       password: param.password,
     },
   };
-  return request(payload);
+  return api(payload);
 };

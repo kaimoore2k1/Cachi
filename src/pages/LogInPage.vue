@@ -16,14 +16,14 @@
                 filled
                 clearable
                 type="email"
-                label="email"
+                :label="$t('username')"
               />
               <q-input
                 square
                 filled
                 clearable
                 type="password"
-                label="password"
+                :label="$t('password')"
                 v-model="password"
               />
             </q-form>
@@ -34,7 +34,7 @@
               color="primary"
               size="lg"
               class="full-width"
-              label="Login"
+              :label="$t('login')"
               @click="handleLogin"
             />
           </q-card-actions>
@@ -50,7 +50,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-import { getToken } from "../api/core/login";
+import { getToken } from "../api";
 export default defineComponent({
   name: "LoginPage",
   setup() {

@@ -5,4 +5,7 @@ export default {
   failed: "Thao tác thất bại",
   success: "Thao tác thành công",
   homePage: "Trang chủ",
+  username: "Tên tài khoản",
+  password: "Mật khẩu",
+  login: "Đăng nhập",
 };

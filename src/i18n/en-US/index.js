@@ -5,4 +5,7 @@ export default {
   failed: "Action failed",
   success: "Action was successful",
   homePage: "Home Page",
+  username: "Email",
+  password: "Password",
+  login: "Login",
 };
