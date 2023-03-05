@@ -1,6 +1,12 @@
-import { boot } from "quasar/wrappers";
-import axios from "axios";
-import { baseURL } from "src/helper/index";
+import { boot } from 'quasar/wrappers';
+import axios, { AxiosInstance } from 'axios';
+import { baseURL } from 'src/helper';
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $axios: AxiosInstance;
+  }
+}
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
@@ -11,7 +17,7 @@ import { baseURL } from "src/helper/index";
 const api = axios.create({
   baseURL,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
   withCredentials: false,
   timeout: 5000,

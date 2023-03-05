@@ -1,11 +1,12 @@
-import { route } from "quasar/wrappers";
+import { route } from 'quasar/wrappers';
 import {
-  createRouter,
   createMemoryHistory,
-  createWebHistory,
+  createRouter,
   createWebHashHistory,
-} from "vue-router";
-import routes from "./routes";
+  createWebHistory,
+} from 'vue-router';
+import { StateInterface } from '../store';
+import routes from './routes';
 
 /*
  * If not building with SSR mode, you can
@@ -16,10 +17,10 @@ import routes from "./routes";
  * with the Router instance.
  */
 
-export default route(function (/* { store, ssrContext } */) {
+export default route<StateInterface>(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : process.env.VUE_ROUTER_MODE === "history"
+    : process.env.VUE_ROUTER_MODE === 'history'
     ? createWebHistory
     : createWebHashHistory;
 
@@ -31,16 +32,16 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(
-      process.env.MODE === "ssr" ? void 0 : process.env.VUE_ROUTER_BASE
+      process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     ),
   });
 
   Router.beforeEach((to, from, next) => {
-    const publicPages = ["/login", "/register"];
+    const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem("user");
+    const loggedIn = localStorage.getItem('user');
     if (authRequired && !loggedIn) {
-      return next("/login");
+      return next('/login');
     }
     next();
   });

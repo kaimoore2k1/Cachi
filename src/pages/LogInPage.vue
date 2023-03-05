@@ -18,8 +18,7 @@
             <q-form class="q-gutter-md">
               <q-input
                 filled
-                v-model="text"
-                :dense="dense"
+                v-model="username"
                 placeholder="Enter your email adress"
               >
                 <template v-slot:prepend>
@@ -30,7 +29,7 @@
               <q-input
                 filled
                 type="password"
-                :dense="dense"
+                v-model="password"
                 placeholder="Enter your password"
               >
                 <template v-slot:prepend>
@@ -55,6 +54,40 @@
   </div>
 </template>
 
+
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { getToken } from '../api';
+export default defineComponent({
+  name: 'LoginPage',
+  setup() {
+    const router = useRouter();
+
+    const username = ref('');
+    const password = ref('');
+
+    const handleLogin = () => {
+      const params = {
+        username: username.value,
+        password: password.value,
+      };
+      console.log(params);
+      getToken(params).then((res) => {
+        localStorage.setItem('user', JSON.stringify(res));
+        router.push('/');
+      });
+    };
+    return {
+      handleLogin,
+      username,
+      password,
+    };
+  },
+});
+</script>
+
 <style>
 .logo {
   width: 30%;
@@ -76,34 +109,3 @@
   width: 100%;
 }
 </style>
-
-<script>
-import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
-import { getToken } from "../api";
-export default defineComponent({
-  name: "LoginPage",
-  setup() {
-    const router = useRouter();
-
-    const username = ref("");
-    const password = ref("");
-
-    const handleLogin = () => {
-      const params = {
-        username: username.value,
-        password: password.value,
-      };
-      getToken(params).then((res) => {
-        localStorage.setItem("user", JSON.stringify(res));
-        router.push("/");
-      });
-    };
-    return {
-      handleLogin,
-      username,
-      password,
-    };
-  },
-});
-</script>
