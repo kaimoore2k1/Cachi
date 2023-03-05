@@ -14,12 +14,12 @@
 
       <div class="row">
         <q-card square bordered class="q-pa-lg shadow-1">
-          <q-card-section style="padding: 0">
+          <q-card-section class="q-pa-none">
             <q-form class="q-gutter-md">
               <q-input
                 filled
                 v-model="username"
-                placeholder="Enter your email adress"
+                placeholder="Enter your email address"
               >
                 <template v-slot:prepend>
                   <q-icon name="email" />
@@ -44,8 +44,11 @@
           </q-card-section>
           <q-card-actions class="q-px-md">
             <q-btn
-              style="background: #ff4646; color: #fff; width: 100%"
+              style="width: 100%"
+              text-color="white"
+              color="primary"
               label="LOGIN"
+              @click="handleLogin"
             />
           </q-card-actions>
         </q-card>
@@ -53,8 +56,6 @@
     </div>
   </div>
 </template>
-
-
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
@@ -73,12 +74,12 @@ export default defineComponent({
         username: username.value,
         password: password.value,
       };
-      console.log(params);
       getToken(params).then((res) => {
         localStorage.setItem('user', JSON.stringify(res));
         router.push('/');
       });
     };
+
     return {
       handleLogin,
       username,
