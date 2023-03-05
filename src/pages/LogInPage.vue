@@ -47,17 +47,17 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
-import { getToken } from "../api";
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { getToken } from '../api';
 export default defineComponent({
-  name: "LoginPage",
+  name: 'LoginPage',
   setup() {
     const router = useRouter();
 
-    const username = ref("");
-    const password = ref("");
+    const username = ref('');
+    const password = ref('');
 
     const handleLogin = () => {
       const params = {
@@ -65,8 +65,8 @@ export default defineComponent({
         password: password.value,
       };
       getToken(params).then((res) => {
-        localStorage.setItem("user", JSON.stringify(res));
-        router.push("/");
+        localStorage.setItem('user', JSON.stringify(res));
+        router.push('/');
       });
     };
     return {

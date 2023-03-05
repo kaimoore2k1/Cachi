@@ -31,14 +31,17 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-import { useStore } from "vuex";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
-  name: "MainLayout",
+  name: 'MainLayout',
+
+  components: {},
 
   setup() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const $store = useStore();
     return {};
   },

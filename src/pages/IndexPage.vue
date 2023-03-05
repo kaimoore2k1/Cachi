@@ -2,9 +2,14 @@
   <q-page class="flex flex-center">Index Page</q-page>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 export default defineComponent({
-  name: "IndexPage",
+  name: 'IndexPage',
+  components: {},
+  setup() {
+    return {};
+  },
 });
 </script>
