@@ -40,7 +40,7 @@
               </template>
             </q-input>
 
-            <p class="q-ma-md" style="text-align: center">
+            <p class="q-ma-md text-center">
               {{ $t('forgot_password') }}
             </p>
 
@@ -53,7 +53,7 @@
               :label="$t('login')"
               style="display: block; margin: 15vw auto 5vw; width: 90%"
             />
-            <p style="text-align: center">
+            <p class="text-center">
               {{ $t('new_user') }}
               <span
                 ><a class="text-weight-bold cursor-pointer">{{
