@@ -22,26 +22,32 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
     ? createMemoryHistory
     : process.env.VUE_ROUTER_MODE === 'history'
     ? createWebHistory
-    : createWebHashHistory;
+    : createWebHashHistory; //Mặc định khởi tạo của tv
 
   const Router = createRouter({
-    scrollBehavior: () => ({ left: 0, top: 0 }),
-    routes,
+    //HÀM KHỞI TẠO
+    scrollBehavior: () => ({ left: 0, top: 0 }), //THUỘC TÍNH HÀM KHỞI TẠO
+    routes, //IMPORT FILE ROUTES.JS
 
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(
+      //TRANG TRƯỚC
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     ),
   });
 
   Router.beforeEach((to, from, next) => {
+    //FROM: ROUTER SẮP CHUYỂN   TO:RT HIỆN TẠI      NEXT:
     const publicPages = ['/login', '/register'];
-    const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+    const authRequired = !publicPages.includes(to.path); //HÀM JS
+    const loggedIn = localStorage.getItem('user'); //KIỂM TRA USER TỪ NƠI LƯU DỮ LIỆU //BIẾN LOCAL STORAGE CÓ Ở MỌI TRANG KHÔNG CẦN
     if (authRequired && !loggedIn) {
       return next('/login');
+    }
+    if (!authRequired && loggedIn) {
+      return next('/');
     }
     next();
   });

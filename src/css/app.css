@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "montserrat-font";
+  src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "montserrat-font";
+  src: url("../assets/fonts/Montserrat-Black.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "montserrat-font";
+  src: url("../assets/fonts/Montserrat-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+body {
+  font-family: "montserrat-font", sans-serif;
+}/*# sourceMappingURL=app.css.map */
