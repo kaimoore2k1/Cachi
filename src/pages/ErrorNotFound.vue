@@ -1,20 +1,29 @@
 <template>
   <div
-    class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center"
+    class="fullscreen bg-primary text-white text-center q-pa-md flex flex-center"
+    style="align-items: center"
   >
     <div>
-      <div style="font-size: 30vh">404</div>
+      <img
+        style="width: 60%"
+        src="../assets/images/icons/page-not-found-svgrepo-com.svg"
+        alt=""
+      />
+      <div style="font-size: 2rem; font-weight: 900">{{ $t('_404Error') }}</div>
 
-      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
+      <div class="text-h2" style="font-size: 1rem; line-height: 1rem">
+        {{ $t('pageNotFound') }}
+      </div>
 
       <q-btn
         class="q-mt-xl"
-        color="white"
-        text-color="blue"
+        color="bg-primary"
+        text-color="white"
         unelevated
         to="/"
-        label="Go Home"
+        :label="$t('backToHome')"
         no-caps
+        style="border: 1px solid white"
       />
     </div>
   </div>

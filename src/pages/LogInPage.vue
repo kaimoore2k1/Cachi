@@ -1,111 +1,122 @@
 <template>
-  <div class="login-background" style="padding-top: 20%">
-    <div class="column">
-      <img src="../assets/images/logo.png" class="logo" alt="" />
-
-      <q-card-section class="text-center q-pa-none">
-        <p
-          class="text-1"
-          style="color: var(--q-primary); font-size: 1.2rem; font-weight: 800"
-        >
-          Login to your Account
-        </p>
-      </q-card-section>
-
-      <div class="row">
-        <q-card square bordered class="q-pa-lg shadow-1">
-          <q-card-section style="padding: 0">
-            <q-form class="q-gutter-md">
-              <q-input
-                filled
-                v-model="username"
-                placeholder="Enter your email adress"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="email" />
-                </template>
-              </q-input>
-
-              <q-input
-                filled
-                type="password"
-                v-model="password"
-                placeholder="Enter your password"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="lock" />
-                </template>
-              </q-input>
-
-              <q-card-section class="text-center q-pa-none">
-                <p class="text-grey-6">Forgot Password?</p>
-              </q-card-section>
-            </q-form>
-          </q-card-section>
-          <q-card-actions class="q-px-md">
-            <q-btn
-              style="background: #ff4646; color: #fff; width: 100%"
-              label="LOGIN"
+  <div class="window-height window-width row justify-center">
+    <div class="column window-height">
+      <div class="col-4 bg-primary window-width">
+        <div class="column justify-center items-center" style="height: 100%">
+          <img
+            class="q-mt-lg shadow-11"
+            src="../assets/images/logo.png"
+            alt=""
+            style="width: 30%; border-radius: 50%"
+          />
+          <h5
+            class="text-h5 q-mb-lg q-mt-lg text-weight-bold"
+            style="color: #fff; text-shadow: 5px 5px #000"
+          >
+            {{ $t('welcome_text') }}
+          </h5>
+        </div>
+      </div>
+      <div class="col justify-center">
+        <div class="row justify-center">
+          <q-form class="col-8" style="padding-top: 20%" @submit="handleLogin">
+            <q-input
+              v-model="username"
+              :placeholder="$t('username')"
+              autocomplete="username"
             />
-          </q-card-actions>
-        </q-card>
+            <q-input
+              v-model="password"
+              :type="isPwd ? 'password' : 'text'"
+              autocomplete="current-password"
+              :placeholder="$t('password')"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+
+            <p class="q-ma-md" style="text-align: center">
+              {{ $t('forgot_password') }}
+            </p>
+
+            <q-btn
+              class="q-ma-xl"
+              unelevated
+              type="submit"
+              rounded
+              color="primary"
+              :label="$t('login')"
+              style="display: block; margin: 15vw auto 5vw; width: 90%"
+            />
+            <p style="text-align: center">
+              {{ $t('new_user') }}
+              <span
+                ><a class="text-weight-bold cursor-pointer">{{
+                  $t('sign_up')
+                }}</a></span
+              >
+            </p>
+
+            <q-select
+              class="translate"
+              style="font-size: 0.6rem; width: 30%; margin: 0 auto; height: 10%"
+              v-model="locale"
+              :options="localeOptions"
+              emit-value
+            />
+          </q-form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getToken } from '../api';
+import { useI18n } from 'vue-i18n';
 export default defineComponent({
   name: 'LoginPage',
   setup() {
     const router = useRouter();
+    const { locale } = useI18n({ useScope: 'global' });
 
     const username = ref('');
     const password = ref('');
+    const isPwd = ref(true);
+
+    const localeOptions = [
+      { value: 'en-US', label: 'English' },
+      { value: 'vi-VN', label: 'Tiếng Việt' },
+    ];
 
     const handleLogin = () => {
       const params = {
         username: username.value,
         password: password.value,
       };
-      console.log(params);
       getToken(params).then((res) => {
         localStorage.setItem('user', JSON.stringify(res));
         router.push('/');
       });
     };
+
     return {
       handleLogin,
       username,
       password,
+      locale,
+      localeOptions,
+      isPwd,
     };
   },
 });
 </script>
 
-<style>
-.logo {
-  width: 30%;
-  border-radius: 30%;
-  margin: 0 auto;
-}
-
-.column {
-  align-content: center;
-}
-
-.q-pa-lg {
-  border: none;
-  box-shadow: none;
-  padding: 0;
-}
-
-.shadow-1 {
-  width: 100%;
-}
-</style>
+<style></style>
