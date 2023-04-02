@@ -39,7 +39,7 @@ export default route<StateInterface>(function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach((to, from, next) => {
-    //FROM: ROUTER SẮP CHUYỂN   TO:RT HIỆN TẠI      NEXT:
+    //FROM: ROUTER SẮP CHUYỂN   TO:RT HIỆN TẠI      NEXT:  chỉ dùng cho beforeeach
     const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path); //HÀM JS
     const loggedIn = localStorage.getItem('user'); //KIỂM TRA USER TỪ NƠI LƯU DỮ LIỆU //BIẾN LOCAL STORAGE CÓ Ở MỌI TRANG KHÔNG CẦN

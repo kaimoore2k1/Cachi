@@ -14,13 +14,13 @@
       <div class="text-h2" style="font-size: 1rem; line-height: 1rem">
         {{ $t('pageNotFound') }}
       </div>
-
+        <!-- to chỉ dùng button -->
       <q-btn
         class="q-mt-xl"
         color="bg-primary"
         text-color="white"
         unelevated
-        to="/"
+        to="/" 
         :label="$t('backToHome')"
         no-caps
         style="border: 1px solid white"
