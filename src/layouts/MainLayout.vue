@@ -12,21 +12,21 @@
         </q-toolbar-title>
         <q-btn flat round dense icon="account_circle">
           <q-menu>
-            <div class="row no-wrap q-pa-md">
-              <div class="column">
-                <div class="text-h6 q-mb-md">Settings</div>
-                <q-toggle v-model="mobileData" label="Use Mobile Data" />
-                <q-toggle v-model="bluetooth" label="Bluetooth" />
-              </div>
-
-              <q-separator vertical inset class="q-mx-lg" />
-
+            <div class="row no-wrap q-pa-lg">
               <div class="column items-center">
                 <q-avatar size="72px">
-                  <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
+                  <img
+                    :src="
+                      userInfo.avatar === '' || !userInfo.avatar
+                        ? require('../assets/images/avatar4.jpg')
+                        : userInfo.avatar
+                    "
+                  />
                 </q-avatar>
 
-                <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+                <div class="text-subtitle1 q-mt-md q-mb-xs">
+                  {{ userInfo.userName }}
+                </div>
 
                 <q-btn
                   @click="handleLogout"
@@ -69,6 +69,15 @@
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+export type IUser = {
+  avatar: string;
+
+  locate: string;
+
+  userName: string;
+
+  userRole: number;
+};
 
 export default defineComponent({
   name: 'MainLayout',
@@ -79,8 +88,7 @@ export default defineComponent({
     const router = useRouter(); //router toàn cục
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const $store = useStore();
-    const mobileData = ref(true);
-    const bluetooth = ref(false);
+    const userInfo = ref<IUser>({} as IUser);
     const backToHomepage = () => {
       router.push('/'); //chuyển sang trang homepage
     };
@@ -89,12 +97,17 @@ export default defineComponent({
       window.localStorage.removeItem('user');
       router.push('/login');
     };
+    const t = window.localStorage.getItem('user'); //Lấy cả user
+
+    if (t != null) {
+      const y = JSON.parse(t);
+      userInfo.value = y;
+    }
 
     return {
       backToHomepage,
-      mobileData,
-      bluetooth,
       handleLogout,
+      userInfo,
     };
   },
 });
