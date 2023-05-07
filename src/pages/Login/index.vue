@@ -5,7 +5,7 @@
         <div class="column justify-center items-center" style="height: 100%">
           <img
             class="q-mt-lg shadow-11"
-            src="../assets/images/logo.png"
+            src="../../assets/images/logo.png"
             alt=""
             style="width: 30%; border-radius: 50%"
           />
@@ -79,7 +79,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { getToken } from '../api';
+import { getToken } from '../../api';
 import { useI18n } from 'vue-i18n';
 export default defineComponent({
   name: 'LoginPage',

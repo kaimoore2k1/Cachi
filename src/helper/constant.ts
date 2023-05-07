@@ -31,4 +31,7 @@ export const baseURL = `http://localhost:${port}`;
 
 export const requestTable = {
   getToken: `${baseURL}/token`,
+  getCategoryList: `${baseURL}/get-category-list`,
+  getProductListByCategoryId: `${baseURL}/get-product-list-by-category-id`,
+  getBestSellerProductListByCategoryId: `${baseURL}/get-best-seller-product-list-by-category-id`,
 };

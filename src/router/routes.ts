@@ -9,26 +9,26 @@ const routes: RouteRecordRaw[] = [
     children: [
       //MẢNG CHỨA CÁC PHẦN TỬ LÀ CÁC ROUTES KHÁC NHAU
       {
-        name: 'IndexPage',
+        name: 'index',
         path: '', //TƯƠNG ĐƯƠNG DÒNG 6
-        component: () => import('pages/IndexPage.vue'),
+        component: () => import('src/pages/index.vue'),
       },
       {
         name: 'LoginPage2',
         path: '/page2', // CHỈ NỐI VỚI CHA
-        component: () => import('pages/IndexPage.vue'),
+        component: () => import('src/pages/index.vue'),
       },
       {
         name: 'LoginPage3',
         path: '/page3',
-        component: () => import('pages/IndexPage.vue'),
+        component: () => import('src/pages/index.vue'),
       },
     ],
   },
   {
     name: 'LoginPage',
     path: '/login',
-    component: () => import('src/pages/LogInPage.vue'),
+    component: () => import('src/pages/Login/index.vue'),
   },
 
   // Always leave this as last one,

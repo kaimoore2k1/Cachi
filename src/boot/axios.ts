@@ -1,5 +1,5 @@
 import { boot } from 'quasar/wrappers';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { baseURL } from 'src/helper';
 
 declare module '@vue/runtime-core' {
@@ -34,7 +34,7 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => {
+  <T>(response: AxiosResponse<T>): T => {
     return response.data;
   },
   (error) => {

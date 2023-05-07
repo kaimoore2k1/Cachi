@@ -12,11 +12,11 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
+    <q-page-container class="no-scroll">
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <q-footer elevated class="bg-grey-8 text-white rounded-borders">
       <q-tabs
         narrow-indicator
         mobile-arrows
