@@ -39,7 +39,6 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   <T>(response: AxiosResponse<T>): T => {
-    console.log('response', response.data);
     return response.data;
   },
   (error) => {
