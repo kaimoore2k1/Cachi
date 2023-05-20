@@ -14,10 +14,14 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
+const user = localStorage.getItem('user');
+const userInfo = user ? JSON.parse(user) : {};
+
 const api = axios.create({
   baseURL,
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': `Bearer ${user ? userInfo.token : ''}`
   },
   withCredentials: false,
   timeout: 5000,
@@ -35,6 +39,7 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   <T>(response: AxiosResponse<T>): T => {
+    console.log('response', response.data);
     return response.data;
   },
   (error) => {

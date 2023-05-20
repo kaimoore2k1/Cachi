@@ -26,8 +26,8 @@ export const REQUEST_METHOD = {
   PUT: 'PUT' as Method,
   DELETE: 'DELETE' as Method,
 };
-export const port = 3000;
-export const baseURL = `http://localhost:${port}`;
+export const port = 7179;
+export const baseURL = `https://localhost:${port}`;
 
 export const requestTable = {
   getToken: `${baseURL}/token`,
